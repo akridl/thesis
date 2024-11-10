@@ -1,0 +1,69 @@
+\documentclass[../main.tex]{subfiles}
+%% \graphicspath{{\subfix{../images/}}}
+
+\begin{document}
+
+In order to make release engineering pipeline effective, as many tasks as possible need to be automated. Within middleware productization\footnote{This is how is called the Release Engineering discipline in Red Hat} pipeline, one of these automated tasks is done by PNC build system. Hence, "customers" of PNC are middleware productization engineers and (non)functional requirements are created by them. The most notable requirements are:
+
+\begin{itemize}
+  \item \textbf{Structured data organization:} Productization engineers can
+organize their data into several levels: Products (e.g. JBoss EAP) has multiple Product Versions (e.g. \textit{3.8}). Every product version can have multiple Product Milestones.
+
+  \item \textbf{Ability to build from upstream:} Being able to fetch source code directly from upstream, e.g. GitHub repository, and make the build above any valid revision in there.
+
+  \item \textbf{Re-usability of previously built artifacts:} Previously built artifacts are used by future builds when it is possible.
+
+  \item \textbf{Version increment and Dependency alignment:} Automatic version increment and  alignment of public dependencies to Red Hat versions.\\
+  \textit{Example:} Suppose we are building the project whose \textit{pom.xml} looks as below:
+
+\begin{lstlisting}[language=XML, caption=Original pom.xml]
+<?xml version="1.0" encoding="UTF-8"?>
+<project ...>
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>foo</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.13.2</version>
+    <scope>test</scope>
+  </dependency>
+</project>
+\end{lstlisting}
+
+After alignment operation, that \textit{pom.xml} could be transformed into:
+\begin{lstlisting}[language=XML, caption=Same pom.xml after alignment operation]
+<?xml version="1.0" encoding="UTF-8"?>
+<project ...>
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>foo</artifactId>
+  <version>1.0.0.redhat-00001</version>
+
+  <dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.13.2.redhat-00004</version>
+    <scope>test</scope>
+  </dependency>
+</project>
+\end{lstlisting}
+
+  We can see that at line 7 happened version increment which got the version \textit{1.0.0.redhat-00001} (meaning that this was first (successful) PNC build for GAV specified at lines 5-7).\\
+  Besides a version increment, we can spot that version at line 12 was changed into \textit{4.13.2.redhat-00004} (meaning that we are using 4th PNC build of GAV specified at lines 10-12).
+
+  \item \textbf{Build reproducibility:} Ability to re-create previously run build.
+
+  \item \textbf{Automatic build scheduling:} Dependencies of build \textit{B} which are used by \textit{B} and need to be (newly) built are built before build \textit{B} is started.
+
+  \item \textbf{Support for multiple build tools:} Provide support for Maven, Gradle, NPM and SBT builds.
+
+  \item \textbf{Ability to re-use build configurations:} Build configuration of the concrete product version can be re-used in its product milestones.
+
+\end{itemize}
+
+\end{document}

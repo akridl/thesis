@@ -1,0 +1,43 @@
+\documentclass[../main.tex]{subfiles}
+%% \graphicspath{{\subfix{../images/}}}
+
+\begin{document}
+
+As was already very briefly mentioned in the beginning of this chapter, PNC has microservice architecture (with 18 microservices in total).
+
+Besides that, the system uses several external services, e.g. internal git repository for fetching source codes, or artifact repository where it stores built artifacts. We will describe the most important of them in order to achieve deeper knowledge how PNC works.
+
+\begin{itemize}
+    \item \textbf{Orchestrator}\\
+    Orchestrator (Orch) is a backend entrypoint for all user requests. It provides both REST API and java client as the way to connect to it. Users interact with PNC either through PNC UI (written in React - in which case, REST API is used to connect to orch) or bacon (CLI app written in Java using Picocli\footnote{\url{https://picocli.info/}} - in which case, java client is used to connect to orch).
+
+    \item \textbf{Repour}\\
+    Microservice for source code related operations: synchronization of upstream repositories (publicly available, e.g. at GitHub or GitLab repository) to downstream repositories (stored in \textbf{internal} GitLab instance). Besides this, Repour is also responsible for alignment operation which is delegated to additional tools (PME, GME, Project manipulator), see below.
+
+    \item \textbf{PME\footnote{\url{https://github.com/release-engineering/pom-manipulation-ext}} / GME\footnote{\url{https://github.com/project-ncl/gradle-manipulator}} / Project Manipulator\footnote{\url{https://github.com/project-ncl/project-manipulator}}}\\
+    Manipulators executing alignment operation, specifically:
+    \begin{itemize}
+        \item \textbf{PME:} Abbreviation of POM Manipulation Extension, which handles alignment in POM files during Maven builds.
+
+        \item \textbf{GME:} Abbreviation of Gradle Manipulation Extension, which handles alignment in \textit{build.gradle} files during Gradle builds.
+
+        \item \textbf{Project Manipulator:} Handles alignment in \textit{package.json} files during NPM builds.
+    \end{itemize}
+
+    Every of these manipulators is delivered as a standalone JAR, which is used (in the context of PNC) from Repour microservice.
+
+    \item \textbf{DA}\\
+    DA stands for dependency analyzer and is used by manipulators in order to find the most feasible version to complete.
+
+    \item \textbf{Build container}\\
+    PNC builds are run within minimalistic OCI container containing just enough tools (based on build configuration) to properly run the build.
+
+    \item \textbf{Environment driver}\\
+    To ensure efficient scaling of PNC, it is essential to automate the deployment of build containers. This process is handled by the environment driver.
+
+    \item \textbf{Artifact repository}\\
+    Once the build is successful, its built artifacts has to be stored in some central place in order to be (potentially) re-used by subsequent builds. PNC uses for this sake internal Red Hat repository called Indy.
+
+\end{itemize}
+
+\end{document}
