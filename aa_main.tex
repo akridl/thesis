@@ -74,7 +74,7 @@
 
       span multiple paragraphs.
     },
-    bib         = example.bib,
+    bib         = bibliography.bib,
     %% Remove the following line to use the JVS 2018 faculty logo.
     facultyLogo = fithesis-fi,
 }
@@ -110,15 +110,19 @@
 
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction} %% Add the (unnumbered) chapter introduction into the ToC, since unnumbered chapters are not added there implicitly
+\label{chap:introduction}
 \subfile{chapters/introduction/main}
 
 \chapter{Context}
+\label{chap:context}
 \subfile{chapters/context/main}
 
 \chapter{Repour microservice}
+\label{chap:repour}
 \subfile{chapters/repour/main}
 
 \chapter{Reqour microservice}
+\label{chap:reqour}
 \subfile{chapters/reqour/main}
 
 \end{document}

@@ -14,7 +14,7 @@ Besides that, the system uses several external services, e.g. internal git repos
     \item \textbf{Repour}\\
     Microservice for source code related operations: synchronization of upstream repositories (publicly available, e.g. at GitHub or GitLab repository) to downstream repositories (stored in \textbf{internal} GitLab instance). Besides this, Repour is also responsible for alignment operation which is delegated to additional tools (PME, GME, Project manipulator), see below.
 
-    \item \textbf{PME\footnote{\url{https://github.com/release-engineering/pom-manipulation-ext}} / GME\footnote{\url{https://github.com/project-ncl/gradle-manipulator}} / Project Manipulator\footnote{\url{https://github.com/project-ncl/project-manipulator}}}\\
+    \item \textbf{PME / GME / Project Manipulator}\\
     Manipulators executing alignment operation, specifically:
     \begin{itemize}
         \item \textbf{PME:} Abbreviation of POM Manipulation Extension, which handles alignment in POM files during Maven builds.
@@ -27,7 +27,7 @@ Besides that, the system uses several external services, e.g. internal git repos
     Every of these manipulators is delivered as a standalone JAR, which is used (in the context of PNC) from Repour microservice.
 
     \item \textbf{DA}\\
-    DA stands for dependency analyzer and is used by manipulators in order to find the most feasible version to complete.
+    DA stands for dependency analyzer and is used by manipulators in two ways: firstly, when project increment is being done, DA returns \textbf{the next version in the sequence} (e.g. when last used per the requested GAV was \textit{redhat-00041}, it will return \textit{redhat-00042}). Secondly, when dependency alignment is being done, DA returns \textbf{the most feasible version} of any previously built artifact of the requested GAV.
 
     \item \textbf{Build container}\\
     PNC builds are run within minimalistic OCI container containing just enough tools (based on build configuration) to properly run the build.

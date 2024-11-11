@@ -53,8 +53,8 @@ After alignment operation, that \textit{pom.xml} could be transformed into:
 </project>
 \end{lstlisting}
 
-  We can see that at line 7 happened version increment which got the version \textit{1.0.0.redhat-00001} (meaning that this was first (successful) PNC build for GAV specified at lines 5-7).\\
-  Besides a version increment, we can spot that version at line 12 was changed into \textit{4.13.2.redhat-00004} (meaning that we are using 4th PNC build of GAV specified at lines 10-12).
+  At line 7 happened so called \textbf{version increment} which got the version \textit{1.0.0.redhat-00001} (meaning that this was first (successful) PNC build for GAV specified at lines 5-7).\\
+  Besides a version increment, we can spot that version at line 12 was changed into \textit{4.13.2.redhat-00004} (meaning that we are using 4th PNC build of GAV specified at lines 10-12). This is called \textbf{dependency alignment}.
 
   \item \textbf{Build reproducibility:} Ability to re-create previously run build.
 
