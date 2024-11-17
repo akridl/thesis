@@ -1,5 +1,4 @@
 \documentclass[../main.tex]{subfiles}
-%% \graphicspath{{\subfix{../images/}}}
 
 \begin{document}
 
@@ -8,15 +7,15 @@ To finalize our insight of how PNC works, we need to describe the build process 
     \item \textbf{Trigger a build}\\
     Build is triggered (almost exclusively) either from PNC UI or Bacon CLI. In both cases, this results in Orch's \textit{trigger build} endpoint being called. Every build is configured by its build configuration containing all the necessary information, e.g.:
     \begin{itemize}
-        \item \textbf{upstream repository:} publicly available repository with source code, e.g. \url{https://github.com/wildfly/wildfly}
+        \item \textbf{repository:} repository with source code, e.g. \url{https://github.com/wildfly/wildfly}
         \item \textbf{git reference:} (branch, tag or commit) revision which will be used to clone source code, e.g. \textit{34.0.0.Final}
         \item \textbf{build type:} either Maven, Gradle, NPM or SBT
         \item \textbf{build environment:} build environment used in build container
         \item \textbf{build script:} script executed in build container, e.g. \textit{mvn clean deploy}
     \end{itemize}
 
-    \item \textbf{Clone repository from upstream}\\
-    Repour clones specified upstream repository locally into the container environment in which it runs. Subsequently, it calls the corresponding manipulator based on the build type (for instance, for Maven build type, PME manipulator is picked).
+    \item \textbf{Start alignment}\\
+    Repour clones specified repository locally into the container environment in which it runs. Subsequently, it starts the alignment operation by calling the corresponding manipulator based on the build type (for instance, for Maven build type, PME manipulator is picked).
 
     \item \textbf{Alignment process}\\
     Manipulator configured from repour communicates with DA to perform both version increment and depdencies alignment.
@@ -41,7 +40,8 @@ To finalize our insight of how PNC works, we need to describe the build process 
     
 \end{enumerate}
 
-The whole build process is also visualized by BPMN diagram\footnote{\url{https://miro.com/diagramming/what-is-bpmn/}} shown in Figure \ref{fig:build-process-bpmn}.
+The whole build process is also visualized by BPMN diagram\footnote{\url{https://miro.com/diagramming/what-is-bpmn/}} shown in the Figure \ref{fig:build-process-bpmn}.\\
+\textbf{Note:} Even though the BPM microservice manages the whole process, it is not shown neither in text description nor in the Figure \ref{fig:build-process-bpmn} in order to prevent showing all the unnecessary details.
 
 \begin{figure}
   \begin{center}

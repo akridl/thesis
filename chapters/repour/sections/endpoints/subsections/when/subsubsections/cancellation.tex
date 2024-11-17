@@ -1,0 +1,9 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+As was mentioned in \ref{section:pnc}, one of the PNC requirements is the ability to cancel any running build. For this those PNC microservices which perform long-running operations expose \textit{POST /cancel} endpoint.
+
+Alignment is an example of such long-running operation during build, which can be cancelled by invoking the \textit{POST /cancel} endpoint.
+
+\end{document}

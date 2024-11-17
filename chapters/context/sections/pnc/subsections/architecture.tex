@@ -1,5 +1,4 @@
 \documentclass[../main.tex]{subfiles}
-%% \graphicspath{{\subfix{../images/}}}
 
 \begin{document}
 
@@ -11,8 +10,13 @@ Besides that, the system uses several external services, e.g. internal git repos
     \item \textbf{Orchestrator}\\
     Orchestrator (Orch) is a backend entrypoint for all user requests. It provides both REST API and java client as the way to connect to it. Users interact with PNC either through PNC UI (written in React - in which case, REST API is used to connect to orch) or bacon (CLI app written in Java using Picocli\footnote{\url{https://picocli.info/}} - in which case, java client is used to connect to orch).
 
+    \item \textbf{BPM}\\
+    BPM (Business Process Manager) is a microservice which manages all the processes (e.g. build process, which will be explained in the next section, or repository creation process described in \ref{section:endpoints}). It calls all the required endpoints from another microservices. Once the whole computation is executed, it returns the result into Orch which (typically) stores result in some form.
+
     \item \textbf{Repour}\\
-    Microservice for source code related operations: synchronization of upstream repositories (publicly available, e.g. at GitHub or GitLab repository) to downstream repositories (stored in \textbf{internal} GitLab instance). Besides this, Repour is also responsible for alignment operation which is delegated to additional tools (PME, GME, Project manipulator), see below.
+    Microservice for source code related operations: synchronization of upstream repositories (publicly available, e.g. at GitHub or GitLab repository) to downstream repositories (stored in \textbf{internal} GitLab instance). These internal repositories are the only ones, which PNC edits, i.e., PNC is not allowed to manipulate in any way with upstream repositories.
+    
+    Besides this, Repour is also responsible for alignment operation which is delegated to additional tools (PME, GME, Project manipulator), see below.
 
     \item \textbf{PME / GME / Project Manipulator}\\
     Manipulators executing alignment operation, specifically:

@@ -1,9 +1,8 @@
 \documentclass[../main.tex]{subfiles}
-%% \graphicspath{{\subfix{../images/}}}
 
 \begin{document}
 
-In order to make release engineering pipeline effective, as many tasks as possible need to be automated. Within middleware productization\footnote{This is how is called the Release Engineering discipline in Red Hat} pipeline, one of these automated tasks is done by PNC build system. Hence, "customers" of PNC are middleware productization engineers and (non)functional requirements are created by them. The most notable requirements are:
+In order to make release engineering pipeline effective, as many tasks as possible need to be automated. Within middleware productization{This is how is called the Release Engineering discipline in Red Hat} pipeline, one of these automated tasks is done by PNC build system. Hence, "customers" of PNC are middleware productization engineers and (non)functional requirements are created by them. The most notable requirements are:
 
 \begin{itemize}
   \item \textbf{Structured data organization:} Productization engineers can
@@ -63,6 +62,8 @@ After alignment operation, that \textit{pom.xml} could be transformed into:
   \item \textbf{Support for multiple build tools:} Provide support for Maven, Gradle, NPM and SBT builds.
 
   \item \textbf{Ability to re-use build configurations:} Build configuration of the concrete product version can be re-used in its product milestones.
+
+  \item \textbf{Build cancellation:} Ability to cancel running build.
 
 \end{itemize}
 

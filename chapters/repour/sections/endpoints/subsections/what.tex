@@ -1,0 +1,59 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+The listing \ref{lst:init} (at lines 31-39) registers all the endpoint handlers into the application router. Hence, it is clearly determined what endpoints Repour has.
+
+\begin{itemize}
+    \item \textbf{\textit{POST /git-external-to-internal}}\\
+    Translation of external Git repository URL into its corresponding internal counterpart.
+
+    For instance, suppose given is external URL \url{https://github.com/akridl/empty}. Internal URL corresponding to this external URL could be e.g. \url{https://gitlab.internal.redhat.com/pnc/akridl/empty}\footnote{Unlike external URL, internal URL is hidden behind Red Hat's firewall, hence not publicly available. However, from security reasons, this URL does not point to real Red Hat GitLab instance anyways.}.
+
+    \item \textbf{\textit{POST /clone}}\\
+    Clone (either partially or fully) from external Git repository into internal Git repository.
+    
+    \item \textbf{\textit{POST /internal-scm}}\\
+    Creation of Source Code Management (SCM) repository within Red Hat internal GitLab instance and PNC workspace.
+
+    \item \textbf{\textit{POST /adjust}}\\
+    Trigger an alignment operation (as described in \ref{section:pnc}).
+
+    \item \textbf{\textit{POST /cancel/\{taskId\}}}\\
+    Cancel the operation with the given \textit{taskId}.
+    
+    \item \textbf{\textit{GET /version}}\\
+    Information about the running JAR in the JSON format containing the following fields:
+    \begin{itemize}
+        \item \textbf{name:}\\
+        Name of the application
+
+        \item \textbf{version:}\\
+        Version of the application
+
+        \item \textbf{commit:}\\
+        Commit upon which was the JAR built
+
+        \item \textbf{builtOn:}\\
+        Date and time when was the JAR built (in ISO-8601 UTC format\footnote{\url{https://www.ietf.org/rfc/rfc3339.txt}})
+
+        \item \textbf{components:}\\
+        Array of additional components in the same format as this JSON being described.\\
+    \end{itemize}
+    
+    \begin{lstlisting}[numbers=none, caption=Example of \textit{/version} endpoint output, label={lst:versionExample}]
+    {
+        "name": "reqour-rest",
+        "version": "1.0.0-SNAPSHOT",
+        "commit": "17f4ad23ee059706154cfb527f72846ef5b8ccc9",
+        "builtOn": "2024-11-13T16:18:03Z",
+        "components": []
+    }
+    \end{lstlisting}
+
+    \item \textbf{\textit{GET /}}\\
+    Minimalistic HTML containing subset of information provided by \textit{/version} endpoint.
+    %% TODO: say that this is just a subset of what can be received from /version in chapter 3
+\end{itemize}
+
+\end{document}

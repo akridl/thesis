@@ -1,0 +1,106 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+Repour is written in Python using asyncio library\footnote{\url{https://docs.python.org/3/library/asyncio.html}}, which is designed to write concurrent code using the \textit{async/await} syntax. The core of asyncio applications is the event loop\footnote{\url{https://docs.python.org/3/library/asyncio-eventloop.html##asyncio-event-loop}}, which takes care of asynchronous tasks, its callbacks, IO operations, and others.
+
+Repour server is being initialized through several methods — below are listed the most important parts of the initialization (all of these listings are taken\footnote{There is not 1:1 correspondence, since pseudocodes covered in this text are simplified.} from Repour's GitHub using \textit{akridl-thesis} tag as the revision: \url{https://github.com/project-ncl/repour/blob/akridl-thesis}).
+
+\begin{lstlisting}[language=Python, caption=Server initialization: \textit{start\_server} method, label={lst:startServer}]
+def start_server(bind, repo_provider, repour_url, adjust_provider):
+    loop = asyncio.get_event_loop()
+
+    loop.run_until_complete(
+        init(
+            loop=loop,
+            bind=bind,
+            repo_provider=repo_provider,
+            repour_url=repour_url,
+            adjust_provider=adjust_provider,
+        )
+    )
+
+    try:
+        loop.run_forever()
+    except KeyboardInterrupt:
+        logger.debug("KeyboardInterrupt")
+\end{lstlisting}
+
+In the listing \ref{lst:startServer} displaying \textit{start\_server()}\footnote{\url{https://github.com/project-ncl/repour/blob/akridl-thesis/repour/server/server.py##L99}}, we can see:
+\begin{itemize}
+    \item \textbf{L2:}\\
+    Obtaining of asyncio's event loop.
+
+    \item \textbf{L4-12:}\\
+    Initialize the application as described at the listing \ref{lst:init}.
+
+    \item \textbf{L14-17:}\\
+    Only once was the intialization of the event loop completed, start the server indefinitely. Allow the server to be killed by keyboard interrupt.
+\end{itemize}
+
+\begin{lstlisting}[language=Python, caption=Server intialization: \textit{init} method, label={lst:init}]
+async def init(loop, bind, repo_provider, repour_url, adjust_provider):
+    app = web.Application(loop=loop)
+
+    external_to_internal_source = endpoint.validated_json_endpoint(
+        shutdown_callbacks,
+        validation.external_to_internal,
+        external_to_internal.translate,
+        repour_url,
+    )
+
+    clone_source = endpoint.validated_json_endpoint(
+        shutdown_callbacks,
+        validation.clone,
+        clone.clone,
+        repour_url,
+        send_logs_to_bifrost=False,
+    )
+
+    adjust_source = endpoint.validated_json_endpoint(
+        shutdown_callbacks, validation.adjust_modeb, adjust.adjust, repour_url
+    )
+
+    internal_scm_source = endpoint.validated_json_endpoint(
+        shutdown_callbacks,
+        validation.internal_scm,
+        internal_scm.internal_scm,
+        repour_url,
+        send_logs_to_bifrost=False,
+    )
+
+    app.router.add_route("GET", "/", info.handle_request)
+    app.router.add_route(
+        "POST", "/git-external-to-internal", external_to_internal_source
+    )
+    app.router.add_route("POST", "/clone", clone_source)
+    app.router.add_route("POST", "/adjust", adjust_source)
+    app.router.add_route("POST", "/internal-scm", internal_scm_source)
+    app.router.add_route("POST", "/cancel/{task_id}", cancel.handle_cancel)
+    app.router.add_route("GET", "/version", info.handle_version)
+
+    server = await loop.create_server(
+        app.make_handler(access_log=None), bind["address"], bind["port"]
+    )
+\end{lstlisting}
+
+    %% TODO: app.router.add_route("GET", "/metrics", aio.web.server_stats)
+    %% what about this endpoint? Should I explain?
+
+In the listing \ref{lst:init} displaying \textit{init()}\footnote{\url{https://github.com/project-ncl/repour/blob/akridl-thesis/repour/server/server.py##L32}}, we can see:
+\begin{itemize}
+    \item \textbf{L2:}\\
+    Initialize \textit{app} as a web server.
+
+    \item \textbf{L4-29:}\\
+    Initialize endpoint handlers.
+
+    \item \textbf{L31-40:}\\
+    Register previously intialized endpoint handlers as routes.
+
+    \item \textbf{L42-44:}\\
+    Finally, create a TCP server binded to the specified address and port.
+
+\end{itemize}
+
+\end{document}
