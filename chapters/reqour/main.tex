@@ -2,8 +2,31 @@
 
 \begin{document}
 
-Reqour intro
-%% TODO: in case this is longer than 2 pages, it'd be beneficial to move it and create from it 2nd chapter
+In the previous chapter, we described Repour microservice, i.e., the current implementation present in PNC Build System. Among others, we identified all the endpoints present and observed when is each endpoint called.
+
+This chapter is about new implementation of Repour, called Reqour\footnote{The name similarity is no coincidence. P to Q change indicates the reimplementation of Repour from Python to Quarkus}. Similarly as Repour's source code, Reqour's source code is publicly available\cite{reqour}.
+
+The chapter is structured as follows: each identified endpoint from the previous chapter but \textit{GET /} and \textit{GET /version} will be a separate section consisting of the following subsections:
+
+\begin{itemize}
+    \item \textbf{Analysis}\\
+    In-depth analysis what an endpoint does, what is its input and what is its output
+
+    \item \textbf{Design}\\
+    Design of an endpoint
+
+    \item \textbf{Implementation}\\
+    The most important implementation details
+
+    \item \textbf{Testing}\\
+    Endpoint functionality tests
+
+    \item \textbf{Comparison with Repour}\\
+    Difference with Repour implementation with focus on scalability and clusterability
+    %% TODO: maybe more talk?
+\end{itemize}
+
+%% TODO: maybe note that at the end will be final comparision?
 
 \section{Translation}
 \subfile{./sections/translation/main}
