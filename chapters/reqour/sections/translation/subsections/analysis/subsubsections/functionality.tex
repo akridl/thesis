@@ -1,0 +1,19 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+Once the validation of external URL is done, we parse out \textit{organization} and \textit{repository} (so that repository does not contain \textit{.git} suffix anymore).
+
+Then the final internal URL is concatenation of:\\
+\textit{git@<Red Hat GitLab URL>:<PNC workspace name>/[organization]/repo.git}.
+
+Supposing that:
+\begin{itemize}
+    \item Red Hat GitLab URL is \textit{gitlab.redhat.com}
+
+    \item PNC workspace name is \textit{pnc}
+\end{itemize}
+
+then for external URL \url{https://github.com/wildfly/wildfly}, the internal URL would be \url{git@gitlab.redhat.com:pnc/wildfly/wildfly.git}.
+
+\end{document}

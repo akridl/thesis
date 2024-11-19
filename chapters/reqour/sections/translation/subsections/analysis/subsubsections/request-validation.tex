@@ -6,15 +6,58 @@ For request to be valid, \textit{externalUrl} field has to match one of the foll
 
 \begin{itemize}
     \item \textbf{SCP-like format:}\\
-    foo
+    Valid SCP-like format meets the regex:\\
+    \textit{\textasciicircum [protocol://]user@host[:port]:[organization/]repository.git\$}\\
+    where:
+    \begin{itemize}
+        \item \textbf{protocol:} underlying protocol we use when reading (writing) the data from (to) external URL, e.g. \textit{http}, or \textit{ssh}
+
+        \item \textbf{user:} specific user performing the operation, e.g. \textit{git}
+
+        \item \textbf{port:} port of the target address, e.g. \textit{443}
+
+        \item \textbf{organization:} name of the organization owning the repository, e.g. the organization of the external URL of \textit{git@github.com:\textbf{wildfly}/wildfly.git} is \textit{wildfly}\footnote{\url{https://github.com/wildfly}}
+
+        \item \textbf{repository.git:} name of the repository with mandatory \textit{.git} suffix
+    \end{itemize}
 
     \item \textbf{Non-SCP-like format:}\\
-    bar
+    Valid Non-SCP-like format meets the regex:\\
+    \textit{\textasciicircum protocol://[user@]host[:port][/organization]/repository[.git]\$}\\
+    where \textit{protocol}, \textit{user}, \textit{host}, \textit{port}, \textit{organization}, and \textit{repository} has the same meaning as in SCP-like format.
 
     \item \textbf{File-like format:}\\
-    baz
+    Valid File-like format meets the regex:\\ \textit{\textasciicircum file://path\$}\\
+    where \textit{path} is either absolute or relative path.
 \end{itemize}
 
-%% TODO: table with examples of valid and invalid requests
+\textbf{Note:} Entries encapsulated within \textit{[]} denote optional part.\\
+
+\textbf{Examples:}
+\begin{itemize}
+    \item git@github.com:my-repo.git\\
+    Valid SCP-like format
+
+    \item scp://git@gitlab.com:22:repo.git\\
+    Valid SCP-like format
+
+    \item git@github.com:my-repo.git\\
+    Invalid SCP-like format: missing mandatory \textit{.git} suffix
+
+    \item git@github.com/my-repo.git\\
+    Invalid SCP-like format: hostname has to be separated with ':', not '/'
+
+    \item https://github.com/my-organization/repo\\
+    Valid Non-SCP-like format
+    
+    \item ssh://github.com:22/my-repo\\
+    Valid Non-SCP-like format
+
+    \item github.com:/project\\
+    Invalid Non-SCP-like format: missing port
+
+    \item github.com/repo\\
+    Invalid Non-SCP-like format: missing protocol
+\end{itemize}
 
 \end{document}
