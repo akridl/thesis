@@ -22,6 +22,22 @@
 
 %% maybe note that snapshot triggers also sonarqube job?
 
-Deployment TBD
+Reqour deployment is done through CI/CD\footnote{Where \textit{D} stands for deployment, not delivery. Hence, the pipeline is fully automatized.} pipeline. The pipeline consists of 2 main parts: Jenkins and GitLab.
+
+\section{Jenkins}
+\subfile{./sections/jenkins}
+
+\section{GitLab}
+\subfile{./sections/gitlab}
+
+Both Jenkins and GitLab parts are visualized (in less detail) in Figure \ref{fig:pipeline}.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{images/pipeline.png}
+  \end{center}
+  \caption{Pipeline}
+  \label{fig:pipeline}
+\end{figure}
 
 \end{document}
