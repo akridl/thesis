@@ -2,6 +2,48 @@
 
 \begin{document}
 
-TBD
+Response DTO (sent as a callback) is JSON of the following format:
+\begin{lstlisting}[numbers=none]
+{
+    "readonlyUrl": "string",
+    "readwriteUrl": "string",
+    "status": {
+        "enum": [
+            "SUCCESS_CREATED",
+            "SUCCESS_ALREADY_EXISTS",
+            "FAILED"
+        ],
+        "type": "string"
+    },
+    "callback": {
+        "status": {
+            "enum": [
+                "SUCCESS",
+                "FAILED",
+                "TIMED_OUT",
+                "CANCELLED",
+                "SYSTEM_ERROR"
+            ],
+            "type": "string"
+        },
+        "id": "string"
+    }
+}
+\end{lstlisting}
+
+Fields have the following meaning:
+\begin{itemize}
+    \item \textbf{readonlyUrl}\\
+    Read-only URL of the repository, used e.g. for cloning.
+
+    \item \textbf{readwriteUrl}\\
+    Read-write URL of the repository, used e.g. for pushing.
+
+    \item \textbf{status}:\\
+    Status of the creation operation. This field is used to differentiate whether the requested repository is created or already existed.
+
+    \item \textbf{callback}:\\
+    Callback describing resulting status of the Reqour's async task.
+\end{itemize}
 
 \end{document}

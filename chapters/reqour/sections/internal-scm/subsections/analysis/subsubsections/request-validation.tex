@@ -1,7 +1,18 @@
-\documentclass[../main.tex]{subfiles}
+\documentclass[../main.text]{subfiles}
 
 \begin{document}
 
-TBD
+Request validation is being done as follows:
+
+\begin{itemize}
+    \item \textbf{project}\\
+    The only validation taking place in Reqour codebase is check for at most '/' character. Another checks, e.g. for valid characters in repository name, take place sooner in the process, e.g. in Orchestrator.
+
+    \item \textbf{taskId}\\
+    Task ID cannot be blank.
+
+    \item \textbf{callback}\\
+    Callback must be present, i.e., cannot be \textit{null}.
+\end{itemize}
 
 \end{document}

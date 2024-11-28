@@ -22,7 +22,7 @@
 
 %% maybe note that snapshot triggers also sonarqube job?
 
-Reqour deployment is done through CI/CD\footnote{Where \textit{D} stands for deployment, not delivery. Hence, the pipeline is fully automatized.} pipeline. The pipeline consists of 2 main parts: Jenkins and GitLab.
+Reqour deployment is done through CI/CD\footnote{Where \textit{D} stands for deployment, not delivery. Hence, the pipeline is fully automatized.} pipeline. The pipeline consists of 2 main parts: Jenkins (during which \textit{reqour} and \textit{reqour-adjuster} \textbf{JARs} are built and published) and GitLab (during which \textit{reqour} and \textit{reqour-adjuster} \textbf{images} are built and published, as well as deployment being done).
 
 \section{Jenkins}
 \subfile{./sections/jenkins}
