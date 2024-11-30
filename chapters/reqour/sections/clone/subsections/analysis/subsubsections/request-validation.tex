@@ -2,6 +2,13 @@
 
 \begin{document}
 
-TBD
+The request DTO is being validated in the following way:
+\begin{itemize}
+    \item \textbf{originRepoUrl, targetRepoUrl}\\
+    Both fields are validated in the same way as \textit{externalUrl} of translation request, as was described in \ref{subsubsec:translation-request-validation}.
+
+    \item \textbf{taskId, callback}\\
+    Same validation takes place as within internal SCM repository creation request (described in \ref{subsubsec:internal-scm-request-validation}).
+\end{itemize}
 
 \end{document}

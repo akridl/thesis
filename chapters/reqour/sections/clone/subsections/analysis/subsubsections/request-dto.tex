@@ -2,6 +2,40 @@
 
 \begin{document}
 
-TBD
+Clone request DTO is JSON of the following format:
+
+\begin{lstlisting}[numbers=none]
+{
+  "originRepoUrl": "string",
+  "targetRepoUrl": "string",
+  "ref": "string",
+  "taskId": "string",
+  "callback": {
+    "method": "string",
+    "uri": "string",
+    "headers": [
+      {
+        "name": "string",
+        "value": "string"
+      }
+    ]
+  }
+}
+\end{lstlisting}
+
+where DTO fields have the following meaning:
+\begin{itemize}
+    \item \textbf{originRepoUrl}\\
+    URL of the origin repository where to clone from.
+
+    \item \textbf{targetRepoUrl}\\
+    URL of the target repository where to push cloned code.
+
+    \item \textbf{ref}\\
+    Optional reference (either branch, tag, or commit) within the origin repository from which to clone from.
+
+    \item \textbf{taskId, callback}\\
+    The meaning is the same as in Internal SCM repository creation DTO described in \ref{subsubsec:internal-scm-request-dto}.
+\end{itemize}
 
 \end{document}

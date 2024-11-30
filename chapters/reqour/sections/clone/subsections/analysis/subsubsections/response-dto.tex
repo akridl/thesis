@@ -2,6 +2,28 @@
 
 \begin{document}
 
-TBD
+The response DTO (sent as callback payload) is JSON of the following format:
+\begin{lstlisting}[numbers=none]
+{
+    "originRepoUrl": "string",
+    "targetRepoUrl": "string",
+    "ref": "string",
+    "callback": {
+        "status": {
+            "enum": [
+                "SUCCESS",
+                "FAILED",
+                "TIMED_OUT",
+                "CANCELLED",
+                "SYSTEM_ERROR"
+            ],
+            "type": "string"
+        },
+        "id": "string"
+    }
+}
+\end{lstlisting}
+
+Description of all the fields but \textit{callback} should be obvious from the request DTO. The \textit{callback} denotes the resulting status of the Reqour's async task, same as was the case also in internal SCM repository creation response DTO.
 
 \end{document}
