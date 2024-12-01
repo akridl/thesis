@@ -1,0 +1,20 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+The implementation of the whole operation is then very similar to the implementation of the internal SCM repository creation operation (see \ref{lst:internal-scm-handler}) and is shown in the Listing \ref{lst:clone-handler}\footnote{\url{https://github.com/project-ncl/reqour/blob/akridl-thesis/rest/src/main/java/org/jboss/pnc/reqour/rest/endpoints/CloneEndpointImpl.java##L38-L47}}. Business logic details are hidden under \textit{service::clone}\footnote{\url{https://github.com/project-ncl/reqour/blob/akridl-thesis/core/src/main/java/org/jboss/pnc/reqour/service/GitCloneService.java##L42-L67}}.
+
+\begin{lstlisting}[language=Java, caption=Clone endpoint handler, label={lst:clone-handler}]
+public void clone(RepositoryCloneRequest cloneRequest) {
+    taskExecutor.executeAsync(
+            cloneRequest.getCallback(),
+            cloneRequest,
+            service::clone,
+            this::handleError,
+            callbackSender::sendRepositoryCloneCallback);
+
+    throw new WebApplicationException(Response.Status.ACCEPTED);
+}
+\end{lstlisting}
+
+\end{document}

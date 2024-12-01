@@ -2,7 +2,7 @@
 
 \begin{document}
 
-Since the operation is creating new internal SCM repository at internal GitLab, the whole operation might take several seconds to finish, forcing us to make the operation is asynchronous.
+Since the operation is creating new internal SCM repository at internal GitLab, the whole operation might take several seconds to finish, forcing us to make the operation asynchronous.
 
 The endpoint handler creates the task for this operation. Task logic is done by underlying service, which parses all the necessary information both from the request and from a configuration. For instance, read-only and read-write URLs are composed by completing project path (parsed from request's \textit{project} field) into the read-only and read-write templates\footnote{\url{https://github.com/project-ncl/reqour/blob/akridl-thesis/core/src/main/resources/application.yaml##L14-L15}}.
 
