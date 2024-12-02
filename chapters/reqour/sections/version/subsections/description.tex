@@ -1,0 +1,47 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+As was already briefly mentioned in \ref{subsubsec:during-debugging}, version endpoint serves for debugging purposes, e.g. in case PNC developer wants to check that the deployment took place and the newest version of the application has been deployed. The version endpoint is not Reqour-specific but is present in PNC microservices thoroughly.
+
+The endpoint responses with JSON of the following format:
+
+\begin{lstlisting}[numbers=none]
+{
+  "name": "string",
+  "version": "string",
+  "commit": "string",
+  "builtOn": "2022-03-10T12:15:50-04:00",
+  "components": [
+    "string"
+  ]
+}
+\end{lstlisting}
+
+where the fields have the following meaning:
+\begin{itemize}
+    \item \textbf{name:} Name of the application.
+    
+    \item \textbf{version:} Version of the application.
+
+    \item \textbf{commit:} SHA of the commit from which the deployment comes from.
+
+    \item \textbf{builtOn:} Time of the build in \textit{ISO8601}\footnote{\url{https://datatracker.ietf.org/doc/html/rfc3339}} format.
+
+    \item \textbf{components:} List of application components in the same format as this DTO.
+\end{itemize}
+
+For example, the current version of the deployment at devel environment is:
+\begin{lstlisting}[numbers=none]
+{
+  "name": "reqour-rest",
+  "version": "1.0.0-SNAPSHOT",
+  "commit": "32739fbde8fd403dec912c96ea917690189ccb5e",
+  "builtOn": "2024-11-28T10:48:02Z",
+  "components": []
+}
+\end{lstlisting}
+
+From the above output, we can easily deduce that the current version comes from the commit \url{https://github.com/project-ncl/reqour/commit/32739fbde8fd403dec912c96ea917690189ccb5e}.
+
+\end{document}

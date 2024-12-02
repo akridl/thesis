@@ -2,6 +2,21 @@
 
 \begin{document}
 
-This will have different structure too and will be even easier than /version
+The root endpoint \textit{GET /} does a redirection (HTTP 303 \textit{See other}) to \textit{GET /version}. The implementation\footnote{\url{https://github.com/project-ncl/reqour/blob/akridl-thesis/rest/src/main/java/org/jboss/pnc/reqour/rest/endpoints/BaseUrlEndpoint.java}} itself is shown in the Listing \ref{lst:base-url-impl} and was introduced alongside \textit{GET /version} implementation in: \url{https://github.com/project-ncl/reqour/pull/7}.
+
+\begin{lstlisting}[language=Java, caption=Implementation of the root endpoint handler, label={lst:base-url-impl}]
+@ApplicationScoped
+@Path("/")
+@Slf4j
+public class BaseUrlEndpoint {
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public ComponentVersion redirectToVersion() {
+        log.debug("Redirecting request to base URL at version endpoint handler");
+        throw new RedirectionException(Response.Status.SEE_OTHER, URI.create("/version"));
+    }
+}
+\end{lstlisting}
 
 \end{document}
