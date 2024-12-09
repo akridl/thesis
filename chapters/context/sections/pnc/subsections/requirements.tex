@@ -12,50 +12,27 @@ organize their data into several levels: Products (e.g. JBoss EAP) has multiple 
 
   \item \textbf{Re-usability of previously built artifacts:} Previously built artifacts are used by future builds when it is possible.
 
-  \item \textbf{Version increment and Dependency alignment:} Automatic version increment and  alignment of public dependencies to Red Hat versions.\\
-  \textit{Example:} Suppose we are building the project whose \textit{pom.xml} looks as below:
-
-\begin{lstlisting}[language=XML, caption=Original pom.xml]
-<?xml version="1.0" encoding="UTF-8"?>
-<project ...>
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>com.example</groupId>
-  <artifactId>foo</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-
-  <dependency>
-    <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
-    <version>4.13.2</version>
-    <scope>test</scope>
-  </dependency>
-</project>
-\end{lstlisting}
-
-After alignment operation, that \textit{pom.xml} could be transformed into:
-\begin{lstlisting}[language=XML, caption=Same pom.xml after alignment operation]
-<?xml version="1.0" encoding="UTF-8"?>
-<project ...>
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>com.example</groupId>
-  <artifactId>foo</artifactId>
-  <version>1.0.0.redhat-00001</version>
-
-  <dependency>
-    <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
-    <version>4.13.2.redhat-00004</version>
-    <scope>test</scope>
-  </dependency>
-</project>
-\end{lstlisting}
-
-  At line 7 happened so called \textbf{version increment} which got the version \textit{1.0.0.redhat-00001} (meaning that this was first (successful) PNC build for GAV specified at lines 5-7).\\
-  Besides a version increment, we can spot that version at line 12 was changed into \textit{4.13.2.redhat-00004} (meaning that we are using 4th PNC build of GAV specified at lines 10-12). This is called \textbf{dependency alignment}.
-
   \item \textbf{Build reproducibility:} Ability to re-create previously run build.
+
+  \item \textbf{Temporary builds:} Ability to make temporary builds, i.e., builds which are after some time removed from DB (with all its corresponding data (in case nothing else depends on this), e.g. built artifacts).
+
+  \item \textbf{Version increment and Dependency alignment:} Automatic version increment and alignment of public dependencies to Red Hat versions (suppose for the rest of the thesis that Red Hat version is just a suffix \textit{redhat-xxxxx} for persistent builds and \textit{temporary-redhat-xxxxx} for temporary builds, where \textit{x} represents a digit). The alignment to Red Hat versions has two main reasons:
+  \begin{enumerate}
+      \item \textbf{Performance:} artifacts built in Red Hat, i.e., those with Red Hat versions, are stored directly in Red Hat artifact repository, which is closer to PNC cluster.
+
+      \item \textbf{No later change guarantee:} any artifact with Red Hat version cannot be changed later. In other words, once the uniquely identified artifact is produced (e.g. \textit{org.foo:bar:1.0.redhat-00001}) its hash remains the same for its whole lifecycle.\\
+      \textbf{Note:} This helps with \textbf{build reproducibility} discussed previously.
+  \end{enumerate}
+
+  \textbf{Example:} Example of version increment together with dependency alignment is shown in Figure \ref{fig:alignment}.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{images/alignment.png}
+  \end{center}
+  \caption{Example alignment of maven build}
+  \label{fig:alignment}
+\end{figure}
 
   \item \textbf{Automatic build scheduling:} Dependencies of build \textit{B} which are used by \textit{B} and need to be (newly) built are built before build \textit{B} is started.
 

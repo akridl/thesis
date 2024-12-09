@@ -1,0 +1,62 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+Adjust request DTO is JSON of the following format:
+
+\begin{lstlisting}[numbers=none]
+{
+    "originRepoUrl": "string",
+    "ref": "string",
+    "sync": boolean,
+    "buildType": "string",
+    "tempBuild": boolean,
+    "internalUrl": {
+        "readwriteUrl": "string",
+        "readonlyUrl": "string"
+    },
+    "brewPullActive": boolean,
+    "buildConfigParameters": {
+	"string",
+        "string"
+    },
+    "pncDefaultAlignmentParameters": "string",
+    "taskId": "string",
+    "callback": {
+        "method": "string",
+        "uri": "string"
+    }
+}
+\end{lstlisting}
+
+where DTO fields have the following meaning:
+\begin{itemize}
+    \item \textbf{originRepoUrl}\\
+    External repository URL from which to synchronize to the corresponding internal repository.
+
+    \item \textbf{sync}\\
+    Whether to synchronize the internal (downstream) repository from external (upstream) repository.
+
+    \item \textbf{buildType}\\
+    Build type, e.g. Maven.
+
+    \item \textbf{tempBuild}\\
+    Whether the build is temporary. Hence, whether the alignment should work with persistent or temporary Red Hat versions.
+
+    \item \textbf{internalUrl}\\
+    Both read-only and read-write URLs of the internal repository.
+
+    \item \textbf{brewPullActive}\\
+    Whether DA should look for built artifacts in Brew (Brew is just another build system among PNC).
+
+    \item \textbf{buildConfigParameters}\\
+    Parameters specified within build configuration when triggering the build. Alignment might take some of these for configuration.
+
+    \item \textbf{pncDefaultAlignmentParameters}\\
+    Sane defaults set by PNC, which are not possible to override.
+
+    \item \textbf{ref, taskId, callback}\\
+    Same meaning as in Cloning DTO described in \ref{subsubsec:cloning-request-dto}.
+\end{itemize}
+
+\end{document}

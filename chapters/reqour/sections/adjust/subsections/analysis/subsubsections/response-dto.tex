@@ -1,0 +1,47 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+The response DTO (sents as callback payload) is JSON of the following format\footnote{The format is not valid JSON, since \textit{manipulatorResult} and \textit{callback} object types are hidden. The former because of unnecessary details, and the latter is already present in the cloning response DTO shown in \ref{subsubsec:cloning-response-dto}}:
+
+\begin{lstlisting}[numbers=none]
+{
+    "downstreamCommit": "string",
+    "tag": "string",
+    "upstreamCommit": "string",
+    "internalUrl": {
+        "readwriteUrl": "string",
+        "readonlyUrl": "string"
+    },
+    "isRefRevisionInternal": boolean,
+    "manipulatorResult": { ... },
+    "callback": { ... }
+}
+\end{lstlisting}
+
+Fields have the following meaning:
+\begin{itemize}
+    \item \textbf{downstreamCommit}\\
+    Commit with alignment changes made by Reqour.
+
+    \item \textbf{tag}\\
+    Tag of the \textbf{downstreamCommit}.
+
+    \item \textbf{upstreamCommit}\\
+    Commit from the upstream repository upon which is the alignment being made.
+    
+    \item \textbf{internalUrl}\\
+    Same meaning as in the request DTO.
+
+    \item \textbf{isRefRevisionInternal}\\
+    True in case the \textit{ref} from the request DTO is present in the internal repository.
+
+    \item \textbf{manipulatorResult}\\
+    Unified format of the result returned from the Reqour.
+    \textbf{Note:} Manipulators themselves do not return result of the unified format. Hence, it is Reqour's responsibility to unify it.
+
+    \item \textbf{callback}\\
+    Same meaning as in the cloning response DTO (see \ref{subsubsec:cloning-response-dto}).
+\end{itemize}
+
+\end{document}
