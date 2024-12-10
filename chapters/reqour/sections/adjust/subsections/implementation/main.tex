@@ -2,9 +2,9 @@
 
 \begin{document}
 
-TBD
+Prior to the alignment operation, it made sense to have everything in a single module (since Reqour API is within \href{https://github.com/project-ncl/pnc-api}{PNC API project}, so clients use PNC API to interact with Reqour) containing all the necessary parts: endpoint handler implementations, service layer, and common abstractions, e.g. asynchronous task executor. However, business logic for adjust together with all its configurations is quite independent, needing only very few abstractions from the rest of the project.
 
-\subsubsection*{Overall overview}
+\subsubsection*{Overall modules overview}
 \subfile{./subsubsections/overview}
 
 \subsubsection*{Module \textit{reqour-core}}
@@ -15,5 +15,8 @@ TBD
 
 \subsubsection*{Module \textit{reqour-adjuster}}
 \subfile{./subsubsections/adjuster}
+
+\subsubsection*{Attached PRs}
+\subfile{./subsubsections/prs}
 
 \end{document}

@@ -2,6 +2,8 @@
 
 \begin{document}
 
-TBD
+The adjuster module contains adjuster logic: it is Quarkus CLI application\footnote{\url{https://quarkus.io/guides/command-mode-reference}}.
+
+Low-level implementation of the adjuster itself corresponds to design shown in Figure \ref{fig:alignment-process}: optional synchronization of the downstream repository from the upstream repository, together with cloning from the downstream repository is done by \href{https://github.com/project-ncl/reqour/blob/akridl-thesis/adjuster/src/main/java/org/jboss/pnc/reqour/adjust/service/RepositoryFetcher.java}{RepositoryFetcher}. Construction of the command running a manipulator is done by concrete implementations of \href{https://github.com/project-ncl/reqour/blob/akridl-thesis/adjuster/src/main/java/org/jboss/pnc/reqour/adjust/provider/AdjustProvider.java}{AdjustProvider}, e.g. \href{https://github.com/project-ncl/reqour/blob/akridl-thesis/adjuster/src/main/java/org/jboss/pnc/reqour/adjust/provider/MvnProvider.java##L102}{MvnProvider} (using the adjust request and runtime configuration of the adjuster). Triggering of the alignment is done simply by executing the constructed command by \textit{ProcessExecutor}. Push of aligned changes is done by \href{https://github.com/project-ncl/reqour/blob/akridl-thesis/adjuster/src/main/java/org/jboss/pnc/reqour/adjust/service/AdjustmentPusher.java}{AdjustmentPusher}. Finally, the unified format of the whole alignment operation is represented by \href{https://github.com/project-ncl/reqour/blob/akridl-thesis/adjuster/src/main/java/org/jboss/pnc/reqour/adjust/model/AdjustmentResult.java}{AdjustmentResult} and being created (either directly or indirectly) in concrete implementations of \textit{AdjustProvider}.
 
 \end{document}

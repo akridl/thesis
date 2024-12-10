@@ -2,6 +2,21 @@
 
 \begin{document}
 
-TBD
+The module contains common abstractions used both from \textit{reqour-rest} and \textit{reqour-adjuster} modules. Most notable abstractions are:
+\begin{itemize}
+    \item \textbf{TaskExecutor}\\
+    Asynchronous task executor (as described in \ref{subsubsec:task-executor}).
+
+    \item \textbf{ProcessExecutor}\\
+    Executor of shell processes (as described in \ref{subsubsec:process-executor}).
+
+    \item \textbf{GitUtils}\footnote{\url{https://github.com/project-ncl/reqour/blob/akridl-thesis/core/src/main/java/org/jboss/pnc/reqour/common/utils/GitUtils.java}}\\
+    Utility class for creating git commands.
+
+    \item \textbf{GitCommands}\footnote{\url{https://github.com/project-ncl/reqour/blob/akridl-thesis/core/src/main/java/org/jboss/pnc/reqour/common/GitCommands.java}}\\
+    Thin wrapper above \textit{ProcessExecutor} to execute git commands (using \textit{GitUtils} to construct the commands).
+\end{itemize}
+
+In addition, service layer is also part of the module.
 
 \end{document}

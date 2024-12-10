@@ -13,6 +13,7 @@ $ git config --bool core.bare false
 The operation itself consists of several git commands. For instance, in case the client does not provide the \textit{ref} field, i.e., cloning of the whole repository takes place, the operation consists of several steps\cite{gitfaq} shown in the Listing \ref{lst:cloning-everything}. Hence, the remaining part is to decide how to execute such git commands. On the one hand, as of today, there already exists git client written in Java, which seems to be maintained and ready to be used right away\footnote{\url{https://github.com/eclipse-jgit/jgit}}. On the other hand, we require to process both standard and standard error outputs in real time in order to inform a user about build progress, so called \textbf{live logs}. In addition, later during alignment operation (will be described in \ref{section:alignment}), we will need support yet another commands (in general, any shell command). This lead to creation of own abstraction, called \textbf{Process Executor}.
 
 \subsubsection*{Process executor}
+\label{subsubsec:process-executor}
 \subfile{./subsubsections/process-executor}
 
 \subsubsection*{Operation design}
