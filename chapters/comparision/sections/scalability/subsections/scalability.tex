@@ -1,0 +1,11 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+One of the definitions of Scalability, or more specifically, Load Scalability, is: "Load scalability is the ability of a system to perform gracefully as the offered traffic increases."\cite{scalability} and can be increased either horizontally (adding more computational resources) or vertically (adding more computation power per resource).
+
+In case of Repour, we have number of computational resources (in our case Repour pod) fixed, and that is 2. Hence, the only option to increase the scalability is by vertical scaling. Since these pods run in PNC production (OpenShift) cluster, vertical scaling is automatically managed by OpenShift itself\footnote{\url{https://docs.openshift.com/container-platform/4.17/nodes/pods/nodes-pods-vertical-autoscaler.html}} and is configured by the Repour deployment. Practically, Repour pod is able to scale up to 5 running alignment in the same time.
+
+In case of Reqour, the situation is different: among OpenShift built-in vertical Pod auto-scaling, there is mainly horizontal scaling (managed by Reqour's alignment endpoint handler) taking place. This allows us to scale up parallel alignments until we have got enough resources to create new Adjuster Job. This should allow us to scale up to higher number of parallel alignments than in case of Repour.
+
+\end{document}

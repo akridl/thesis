@@ -4,11 +4,11 @@
 
 The alignment operation is a long-running operation, possibly taking several dozens of minutes, in some cases even exceeding over an hour. Hence, there is no doubt that this operation has to be asynchronous.
 
-In essence, everything depicted in Figure \ref{fig:alignment-process} as Reqour's responsibility is delegated to an Adjuster, which is created per alignment (hence per build) within the corresponding PNC OpenShift cluster.
+In essence, everything depicted in Figure \ref{fig:alignment-process} as Reqour's responsibility is delegated to an Adjuster, which is created per alignment (hence per build) inside the corresponding PNC OpenShift cluster.
 
-The endpoint handler is analogous to internal SCM repository creation and cloning endpoint handlers: asynchronously starts execution of some code (in this case creation of Adjuster Job in the OpenShift cluster) and immediately returns 202 Accepted.
+The endpoint handler itself is being pretty simple: asynchronously starts execution of some code (in this case creation of Adjuster Job in the OpenShift cluster) and immediately returns 202 Accepted.
 
-Once the created adjuster is fully initialized and cloned the source code from the downstream repository, it starts a manipulator (as \textit{java -jar manipulator.jar})\footnote{The only difference is SMEG which is distributed as an SBT plugin, thus being run directly through SBT.} communicating with DA during the alignment process.
+Once the created Adjuster is fully initialized, all the work is done in here: optionally synchronize the downstream repository to the upstream repository, clone the source code from the downstream repository, start a manipulator (as \textit{java -jar manipulator.jar})\footnote{The only difference is SMEG which is distributed as an SBT plugin, thus being run directly through SBT.} communicating with DA during the alignment process, and make a callback at the end.
 
 Above word description is visualized in Figure \ref{fig:alignment-design}.
 
