@@ -2,29 +2,9 @@
 
 \begin{document}
 
-%% maybe mention CI pipeline on PR event?
-
-
-%% 1) jenkins snapshot
-%% compile, checks formatting, test
-%% snapshot because publishes snapshot version to maven
-%% 2 JARs: reqour-rest, reqour-adjuster
-
-%% 2.1) reqour-adjuster-image job triggering Gitlab pipeline
-%% build the image (using reqour-adjuster JAR)
-%% push the image to quay.io
-
-%% 2.2) reqour-image job triggering Gitlab pipeline
-%% build the image (using reqour-erst JAR)
-%% push the image to quay
-%% apply (what's the correct word) the helm chart using that image
-%% helm templating being used to define all the environemnts (devel, next-stable, stage, prod)
-
-%% maybe note that snapshot triggers also sonarqube job?
-
 Reqour deployment is done through CI/CD\footnote{Where \textit{D} stands for deployment, not delivery. Hence, the pipeline is fully automatized.} pipeline. The pipeline consists of 2 main parts: Jenkins (during which \textit{reqour} and \textit{reqour-adjuster} \textbf{JARs} are built and published) and GitLab (during which \textit{reqour} and \textit{reqour-adjuster} \textbf{images} are built and published, as well as deployment being done).
 
-All PNC deployment configs are managed as a part of internal RedHat GitLab instance, hence, not being publicly available. Because of that, only word description together with diagrams will be present in this chapter.
+All PNC deployment configs are managed as a part of the internal RedHat GitLab instance, hence, not being publicly available. Because of that, only word descriptions together with diagrams will be present in this chapter.
 
 \section{Jenkins}
 \subfile{./sections/jenkins}

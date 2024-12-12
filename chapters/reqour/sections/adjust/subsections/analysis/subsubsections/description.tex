@@ -3,7 +3,7 @@
 
 \begin{document}
 
-The alignment operation workflow is the following: Reqour (optionally) synchronizes the downstream repository with the upstream repository. Then, it clones the source code from the downstream repository based on the information provided in the request. The cloned repository should contain project file (e.g. \textit{pom.xml} for Maven project). This file is passed to the configured manipulator (based on the request and the runtime configuration), which uses DA to align the file. Once the alignment is done, Reqour pushes aligned changes do \textbf{downstream} repository, parses the manipulator result and returns response in a unified format\footnote{Unification of the format is Reqour's responsibility since every manipulator returns the result in its custom format.}.
+The alignment operation workflow is the following: Reqour (optionally) synchronizes the downstream repository with the upstream repository. Then, it clones the source code from the downstream repository based on the information provided in the request. The cloned repository should contain a project file (e.g. \textit{pom.xml} for the Maven project). This file is passed to the configured manipulator (based on the request and the runtime configuration), which uses DA to align the file. Once the alignment is done, Reqour pushes aligned changes do \textbf{downstream} repository, parses the manipulator result, and returns a response in a unified format\footnote{Unification of the format is Reqour's responsibility since every manipulator returns the result in its custom format.}.
 The workflow is shown in Figure \ref{fig:alignment-process}.
 
 \begin{figure}
@@ -26,7 +26,7 @@ The workflow is shown in Figure \ref{fig:alignment-process}.
   \label{fig:version-increment-vs-dependency-alignment}
 \end{figure}
 
-Finally, the table \ref{table:build-types-and-manipulators} lists build types and their corresponding manipulators used during alignment. Every manipulator but SMEG is distributed as a standalone JAR (SMEG being distributed as a Scala plugin). Maven and Gradle builds make up the vast majority of PNC builds. This results in PME and GME providing more functionalities. For instance, PME is project maintained by \href{https://github.com/release-engineering}{Red Hat Productization}.
+Finally, the table \ref{table:build-types-and-manipulators} lists build types and their corresponding manipulators used during alignment. Every manipulator but SMEG is distributed as a standalone JAR (SMEG being distributed as a Scala plugin). Maven and Gradle builds make up the vast majority of PNC builds. This results in PME and GME providing more functionalities. For instance, PME is the project maintained by \href{https://github.com/release-engineering}{Red Hat Productization}.
 
 \begin{figure}
     \begin{center}

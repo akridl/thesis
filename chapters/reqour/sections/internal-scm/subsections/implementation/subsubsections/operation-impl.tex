@@ -2,7 +2,7 @@
 
 \begin{document}
 
-The implementation of internal SCM repository creation itself contains just call to asynchronous task executor, see Listing \ref{lst:internal-scm-handler}\footnote{\url{https://github.com/project-ncl/reqour/blob/akridl-thesis/rest/src/main/java/org/jboss/pnc/reqour/rest/endpoints/InternalSCMRepositoryCreationEndpointImpl.java##L50-L59}}.\\
+The implementation of internal SCM repository creation itself contains just a call to the asynchronous task executor, see Listing \ref{lst:internal-scm-handler}\footnote{\url{https://github.com/project-ncl/reqour/blob/akridl-thesis/rest/src/main/java/org/jboss/pnc/reqour/rest/endpoints/InternalSCMRepositoryCreationEndpointImpl.java##L50-L59}}.\\
 \textbf{Note:} Even though the implementation seems to be trivial enough, the most difficult part (once having asynchronous task executor abstraction) is still hidden under \textit{service::createInternalSCMRepository}\footnote{\url{https://github.com/project-ncl/reqour/blob/akridl-thesis/core/src/main/java/org/jboss/pnc/reqour/service/GitlabRepositoryCreationService.java##L42-L75}}, which contains the whole business logic.
 
 \begin{lstlisting}[language=Java, caption=Internal SCM repository creation endpoint handler, label={lst:internal-scm-handler}]

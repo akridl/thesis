@@ -4,11 +4,11 @@
 
 Firstly, there will be an endpoint handler handling all \textit{POST} requests at path \textit{/external-to-internal}. This endpoint handler will already accept only valid requests.
 
-The endpoint will not contain business functionality, but will delegate the computation to the underlying service. Once the service responds with the result, endpoint simply returns the resulting DTO.
+The endpoint will not contain business functionality but will delegate the computation to the underlying service. Once the service responds with the result, the endpoint simply returns the resulting DTO.
 
 The above word description is visualized in Figure \ref{fig:translation-design}.
 
-Translation operation can be synchronous since consisting only from parsing, validation, and final concatenation (none of which taking non-trivial amount of time).
+Translation operation can be synchronous since consisting only of parsing, validation, and final concatenation (none of which takes a non-trivial amount of time).
 
 \begin{figure}
   \begin{center}

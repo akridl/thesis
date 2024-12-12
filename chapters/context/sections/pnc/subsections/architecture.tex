@@ -2,24 +2,24 @@
 
 \begin{document}
 
-As was already very briefly mentioned in the beginning of this chapter, PNC has microservice architecture (with 18 microservices in total).
+As was already mentioned at the beginning of this chapter, PNC has microservice architecture (with 18 microservices in total).
 
-Besides that, the system uses several external services, e.g. internal git repository for fetching source codes, or artifact repository where it stores built artifacts. We will describe the most important of them in order to achieve deeper knowledge how PNC works.
+Besides that, the system uses several external services, e.g. the internal Git SCM repository for fetching source codes, or the artifact repository where it stores built artifacts. We will describe the most important of them in order to achieve deeper knowledge of how PNC works.
 
 \begin{itemize}
     \item \textbf{Orchestrator}\\
-    Orchestrator (Orch) is a backend entrypoint for all user requests. It provides both REST API and java client as the way to connect to it. Users interact with PNC either through PNC UI (written in React - in which case, REST API is used to connect to orch) or bacon (CLI app written in Java using Picocli\footnote{\url{https://picocli.info/}} - in which case, java client is used to connect to orch).
+    Orchestrator (Orch) is a backend entry point for all user requests. It provides both REST API and Java client as the way to connect to it. Users interact with PNC either through PNC UI (written in React - in which case, REST API is used to connect to orch) or bacon (CLI app written in Java using Picocli\footnote{\url{https://picocli.info/}} - in which case, java client is used to connect to orch).
 
     \item \textbf{BPM}\\
-    BPM (abbreviation of Business Process Manager) is a microservice which manages all the processes (e.g. build process, which will be explained in the next section, or repository creation process described in \ref{section:endpoints}). It calls all the required endpoints from another microservices. Once the whole computation is executed, it returns the result into Orch which (typically) stores result in some form.
+    BPM (abbreviation of Business Process Manager) is a microservice managing all the processes (e.g. build process, which will be explained in the next section, or repository creation process described in \ref{section:endpoints}). It calls all the required endpoints from other microservices. Once the whole computation is executed, it returns the result into Orch which (typically) stores the result in some form.
 
     \item \textbf{Repour}\\
-    Microservice for source code related operations: synchronization of upstream repositories (publicly available, e.g. at GitHub or GitLab repository) to downstream repositories (stored in \textbf{internal} GitLab instance). These internal repositories are the only ones, which PNC edits, i.e., PNC is not allowed to manipulate in any way with upstream repositories.
+    Microservice for source code-related operations: synchronization of upstream repositories (publicly available, e.g. at GitHub or GitLab repository) to downstream repositories (stored in \textbf{internal} GitLab instance). These internal repositories are the only ones, that PNC edits, i.e., PNC is not allowed to manipulate in any way with upstream repositories.
     
     Besides this, Repour is also responsible for alignment operation which is delegated to additional tools (PME, GME, Project manipulator), see below.
 
     \item \textbf{PME / GME / Project Manipulator}\\
-    Manipulators executing alignment operation, specifically:
+    Manipulators executing alignment operations, specifically:
     \begin{itemize}
         \item \textbf{PME:} Abbreviation of POM Manipulation Extension, which handles alignment in POM files during Maven builds.
 
@@ -28,19 +28,19 @@ Besides that, the system uses several external services, e.g. internal git repos
         \item \textbf{Project Manipulator:} Handles alignment in \textit{package.json} files during NPM builds.
     \end{itemize}
 
-    Every of these manipulators is delivered as a standalone JAR, which is used (in the context of PNC) from Repour microservice.
+    Each of these manipulators is delivered as a standalone JAR, which is used (in the context of PNC) from Repour microservice.
 
     \item \textbf{DA}\\
     DA stands for dependency analyzer and is used by manipulators in two ways: firstly, when project increment is being done, DA returns \textbf{the next version in the sequence} (e.g. when last used per the requested GAV was \textit{redhat-00041}, it will return \textit{redhat-00042}). Secondly, when dependency alignment is being done, DA returns \textbf{the most feasible version} of any previously built artifact of the requested GAV.
 
     \item \textbf{Build container}\\
-    PNC builds are run within minimalistic OCI container containing just enough tools (based on build configuration) to properly run the build.
+    PNC builds are run within a minimalistic OCI container containing just enough tools (based on build configuration) to properly run the build.
 
     \item \textbf{Environment driver}\\
     To ensure efficient scaling of PNC, it is essential to automate the deployment of build containers. This process is handled by the environment driver.
 
     \item \textbf{Artifact repository}\\
-    Once the build is successful, its built artifacts has to be stored in some central place in order to be (potentially) re-used by subsequent builds. PNC uses for this sake internal Red Hat repository called Indy.
+    Once the build is successful, its built artifacts have to be stored in some central place in order to be (potentially) re-used by subsequent builds. PNC uses for this sake the internal Red Hat repository called Indy.
 
 \end{itemize}
 

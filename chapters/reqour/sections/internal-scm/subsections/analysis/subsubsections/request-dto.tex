@@ -24,13 +24,13 @@ Internal SCM repository creation request DTO is JSON of the following format:
 Fields of the DTO have the following meaning:
 \begin{itemize}
     \item \textbf{project}\\
-    Name of the repository to be created, e.g. \textit{wildfly}. Optionally, a user can specify also name of the organization under which should this repository created. In the latter case, the organization is separated from the repository name by the '/' character, e.g. \textit{wildfly/wildfly}.
+    Name of the repository to be created, e.g. \textit{wildfly}. Optionally, a user can specify also the name of the organization under which should this repository be created. In the latter case, the organization is separated from the repository name by the '/' character, e.g. \textit{wildfly/wildfly}.
 
     \item \textbf{taskId}\\
     Task ID to be assigned for this (asynchronous) operation.
 
     \item \textbf{callback}\\
-    Callback where to send result once operation is finished.
+    Callback where to send the result once the operation is finished.
 \end{itemize}
 
 \end{document}

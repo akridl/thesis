@@ -35,7 +35,7 @@ In the listing \ref{lst:startServer} displaying \textit{start\_server()}\footnot
     Initialize the application as described at the listing \ref{lst:init}.
 
     \item \textbf{L14-17:}\\
-    Only once was the intialization of the event loop completed, start the server indefinitely. Allow the server to be killed by keyboard interrupt.
+    Only once was the initialization of the event loop completed, start the server indefinitely. Allow the server to be killed by a keyboard interrupt.
 \end{itemize}
 
 \begin{lstlisting}[language=Python, caption=Server intialization: \textit{init} method, label={lst:init}]
@@ -84,9 +84,6 @@ async def init(loop, bind, repo_provider, repour_url, adjust_provider):
     )
 \end{lstlisting}
 
-    %% TODO: app.router.add_route("GET", "/metrics", aio.web.server_stats)
-    %% what about this endpoint? Should I explain?
-
 In the listing \ref{lst:init} displaying \textit{init()}\footnote{\url{https://github.com/project-ncl/repour/blob/akridl-thesis/repour/server/server.py##L32}}, we can see:
 \begin{itemize}
     \item \textbf{L2:}\\
@@ -96,10 +93,10 @@ In the listing \ref{lst:init} displaying \textit{init()}\footnote{\url{https://g
     Initialize endpoint handlers.
 
     \item \textbf{L31-40:}\\
-    Register previously intialized endpoint handlers as routes.
+    Register previously initialized endpoint handlers as routes.
 
     \item \textbf{L42-44:}\\
-    Finally, create a TCP server binded to the specified address and port.
+    Finally, create a TCP server bound to the specified address and port.
 
 \end{itemize}
 
