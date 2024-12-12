@@ -2,6 +2,12 @@
 
 \begin{document}
 
-TBD
+The goal of the thesis was to design and implement a new solution of Repour microservice\cite{repour} within PNC build system in Quarkus. In addition, the new solution should enhance clusterability, maintainability, and scalability.
+
+The new solution, Reqour, was designed with desirable enhancements in mind. Based on the design, an implementation (using Quarkus framework) took place and was continuously being published as a series of pull requests and commits in GitHub. Most importantly, a new repository under PNC build system organization was created to contain the solution\cite{reqour}. Apart from this repository, Reqour REST API was contributed to PNC API repository\footnote{\url{https://github.com/project-ncl/pnc-api}} so that clients can migrate to Reqour later.
+
+Deployment of Reqour microservice was made and Reqour is part of PNC development cluster since August 2024. Most importantly, once PNC developers decide to make deployment also to staging and production environments, these deployments will in essence mean just a few configuration changes.
+
+Regarding future work, an integration of Reqour within the build process inside a new Dingrogu microservice\footnote{\url{https://github.com/project-ncl/dingrogu}} will have to happen (so called RHPAM initiative). Possibly, in case PNC developers would want to use Reqour before RHPAM initiative takes place, BPM codebase would need to be changed to use Reqour instead of Repour\footnote{However, this is more unlikely than likely.}.
 
 \end{document}
