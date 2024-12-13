@@ -1,0 +1,25 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{enumerate}
+    \item Download the source code\\
+    
+    \item Navigate to the source code root directory\\
+    This is the directory where you can see \textbf{adjuster/}, \textbf{core/}, and \textbf{rest/} directories.
+
+    \item Compile the application\\
+    Run \textbf{mvn clean install -DskipTests}. Do not forget to link your Maven to Java 21, otherwise the build will not be successful.
+
+    \item Navigate to \textbf{rest/} directory\\
+
+    \item Run the application in Quarkus dev mode\footnote{\url{https://quarkus.io/guides/getting-started##development-mode}}\\
+    Run \textbf{quarkus dev}. Reqour uses Quarkus version \textit{3.16.3}\footnote{\url{https://github.com/project-ncl/reqour/blob/akridl-thesis/pom.xml##L82}}, so in case of problems, explicitly specify this version.
+
+    \item Start requesting the running application\\
+    You can request the application directly from any HTTP client, e.g. \textit{curl}. Because Reqour exposes its API using OpenAPI thanks to \textit{quarkus-smallrye-openapi} extension\footnote{\url{https://quarkus.io/guides/openapi-swaggerui}}, you can open Swagger UI at the default URL: \url{http://localhost:8080/q/swagger-ui/}.
+
+    \textbf{WARNING:} Be aware that requests working with external systems (namely: \textit{POST /adjust} and \textit{POST /cancel} — both working with OpenShift, and \textit{POST /internal-scm} — working with GitLab) will \textbf{NOT} work out of the box. In both cases are needed own resources (an OpenShift cluster in first 2 cases, and a GitLab workspace in the third case) and corresponding secrets to these resources (OpenShift and GitLab API Group tokens) which are not provided publicly from security reasons.
+\end{enumerate}
+
+\end{document}

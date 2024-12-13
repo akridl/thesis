@@ -1,0 +1,24 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+Reqour contains extensive test suites in the form of unit tests and integration tests.
+
+Unit tests are used in several different ways:
+\begin{itemize}
+    \item Testing a single method without any dependencies:\\
+    For example: \href{https://github.com/project-ncl/reqour/blob/akridl-thesis/core/src/test/java/org/jboss/pnc/reqour/common/utils/IOUtilsTest.java}{IOUtilsTest}
+
+    \item Testing a single method and mocking internal dependencies (using Mockito\footnote{\url{https://site.mockito.org/}})\\
+    For example: \href{https://github.com/project-ncl/reqour/blob/akridl-thesis/core/src/test/java/org/jboss/pnc/reqour/service/GitlabRepositoryCreationServiceTest.java}{GitlabRepositoryCreationServiceTest}
+
+    \item Testing a single method and mocking the whole underlying layer (using Mockito):\\
+    For example: \href{https://github.com/project-ncl/reqour/blob/akridl-thesis/rest/src/test/java/org/jboss/pnc/reqour/rest/endpoints/TranslationEndpointTest.java}{TranslationEndpointTest}
+
+    \item Testing a single method and mocking external dependencies (using WireMock\footnote{\url{https://wiremock.org/}}):\\
+    For example: \href{https://github.com/project-ncl/reqour/blob/akridl-thesis/rest/src/test/java/org/jboss/pnc/reqour/rest/endpoints/InternalSCMRepoCreationEndpointTest.java}{InternalSCMRepoCreationEndpointTest}
+\end{itemize}
+
+Integration tests are not present everywhere, e.g. to test \textit{POST /adjust}, we would need to integrate with an OpenShift cluster, but whenever it makes sense, an integration test is also used, e.g. \href{https://github.com/project-ncl/reqour/blob/akridl-thesis/rest/src/test/java/org/jboss/pnc/reqour/rest/endpoints/TranslationEndpointIT.java}{TranslationEndpointIT}.
+
+\end{document}

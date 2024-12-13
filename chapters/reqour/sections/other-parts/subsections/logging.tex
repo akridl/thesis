@@ -1,0 +1,13 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+For logging, we use SLF4J\footnote{\url{https://www.slf4j.org/}}, which is defined in our classes as a static field created by Lombok's \textit{@Slf4j}\footnote{\url{https://projectlombok.org/api/lombok/extern/slf4j/Slf4j}} annotation. SLF4J uses as its logging backend JBoss Log Manager, which is configured by Quarkus by default (and connection to this backend is done through its corresponding adapter \footnote{\url{https://github.com/jboss-logging/slf4j-jboss-logmanager}}).
+
+Since JBoss Log Manager backend supports MDC\footnote{\url{https://javadoc.io/doc/org.jboss.logmanager/jboss-logmanager/latest/org/jboss/logmanager/MDC.html}} (Mapped Diagnostic Context), we set this up (based on HTTP Headers of incoming requests to Reqour) and use to further identify our emitted log events.
+
+We use JSON as the logging format\footnote{\url{https://quarkus.io/guides/logging##json-logging}} (configured automatically when using \textit{quarkus-logging-json} extension).
+
+There are 2 logging handlers: console logging handler printing all the caught log events into a console, and Kafka logging handler provided by \textit{quarkus-logging-kafka}\footnote{\url{https://github.com/project-ncl/quarkus-logging-kafka}} dependency, which sends all the incoming log events into a Kafka topic. Thanks to this, Reqour contributes to logging pipeline and providing so-called \textbf{live-logs} from its part of a build.
+
+\end{document}
