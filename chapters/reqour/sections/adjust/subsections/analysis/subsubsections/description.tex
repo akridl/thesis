@@ -3,7 +3,7 @@
 
 \begin{document}
 
-The alignment operation workflow is the following: Reqour (optionally) synchronizes the downstream repository with the upstream repository. Then, it clones the source code from the downstream repository based on the information provided in the request. The cloned repository should contain a project file (e.g. \textit{pom.xml} for the Maven project). This file is passed to the configured manipulator (based on the request and the runtime configuration), which uses DA to align the file. Once the alignment is done, Reqour pushes aligned changes do \textbf{downstream} repository, parses the manipulator result, and returns a response in a unified format\footnote{Unification of the format is Reqour's responsibility since every manipulator returns the result in its custom format.}.
+The alignment operation workflow is the following: Reqour optionally synchronizes a downstream repository with an upstream repository. Then, it clones the source code from the downstream repository based on the information provided in a request. The cloned repository should contain a project file (e.g. \textit{pom.xml} for the Maven project). This file is passed to a configured manipulator (based on the request and the runtime configuration), which uses DA to align the project file. Once the alignment is done, Reqour pushes aligned changes to the \textbf{downstream} repository, parses the manipulator result, and returns a response in a unified format\footnote{Unification of the format is Reqour's responsibility since every manipulator returns the result in its custom format.}.
 The workflow is shown in Figure \ref{fig:alignment-process}.
 
 \begin{figure}
@@ -14,7 +14,7 @@ The workflow is shown in Figure \ref{fig:alignment-process}.
   \label{fig:alignment-process}
 \end{figure}
 
-\textbf{Note:} By \textbf{alignment operation}, we mean both \textbf{version increment} together with \textbf{dependency alignment}. The difference between the two is that during a version increment, \textbf{next non-existing version} in the sequence is chosen, whilst during the latter, \textbf{most feasible version from existing versions} is chosen.
+\textbf{Note:} By \textbf{alignment operation}, we mean both \textbf{version increment} together with \textbf{dependency alignment}. The difference between the two is that during a version increment, \textbf{next non-existing version} in the sequence is chosen, whilst during the latter, \textbf{the most feasible version from existing versions} is chosen.
 
 \textbf{Example:} Suppose that we request DA and all available versions of the artifact \textit{org.foo:bar} are as shown in Figure \ref{fig:version-increment-vs-dependency-alignment}. Version increment for a temporary build will be \textbf{temporary-redhat-00003}. Dependency alignment for a persistent build will be \textbf{redhat-00003}\footnote{Supposing that simply the built artifact from the last persistent build is taken. In reality, PNC dependency alignment is a little more involved but it is not important for our context.}.
 

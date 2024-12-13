@@ -6,6 +6,6 @@ First things first, we need to unify a terminology: A \textbf{cluster} is two or
 
 From the above, it should be clear that stateless applications are predetermined to support clusterability effortlessly (since they do not store any state), unlike stateful applications. As a consequence, stateless applications are naturally able to support scalability, fault tolerance, and other key properties of cloud-native applications\footnote{\url{https://www.redhat.com/en/topics/cloud-native-apps/stateful-vs-stateless##stateful-vs-stateless}}.
 
-Repour is stateful: it remembers its running (asynchronous) tasks executed in its asyncio event loop. When \textit{POST /cancel/{taskId}} request is being handled, Repour's load-balancer has to send this request to all its underlying replicas since \textbf{at most} one of these replicas is potentially executing the task corresponding to the given \textit{taskId}. On the other hand, Reqour is stateless — hence, it should support clusterability more easily than Repour.
+Repour is stateful: it remembers its running (asynchronous) tasks executed in its asyncio event loop. When \textit{POST /cancel/\{taskId\}} request is being handled, Repour's load-balancer has to send this request to all its underlying replicas since \textbf{at most} one of these replicas is potentially executing the task corresponding to the given \textit{taskId}. On the other hand, Reqour is stateless — hence, it should support clusterability more easily than Repour.
 
 \end{document}

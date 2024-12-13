@@ -13,11 +13,11 @@ Within the listing \ref{lst:init}, every endpoint is created by\\
     \item \textbf{Validate parsed request}\\
     Every endpoint provides a valid format that all the incoming requests must meet. In case an invalid request is given, 400 is returned.
 
-    \item \textbf{Call the function}\\
-    Call the function provided as one of the arguments, which is doing the actual computation.
+    \item \textbf{Call a function}\\
+    Call a function provided as one of the arguments, which is doing the actual computation.
 
-    \item \textbf{Send the callback}\\
-    In case the callback was provided within the request, make the callback. The method that handles callback sending is implemented to be resilient by using retries and exponential backoff between fails.
+    \item \textbf{Send a callback}\\
+    In case a callback was provided within the request, send the callback. The method handling the callback sending is implemented to be resilient by using retries and exponential backoff between fails.
 
 \end{enumerate}
 

@@ -4,7 +4,7 @@
 
 The alignment operation is a long-running operation, possibly taking several dozens of minutes, in some cases even exceeding an hour. Hence, there is no doubt that this operation has to be asynchronous.
 
-In essence, everything depicted in Figure \ref{fig:alignment-process} as Reqour's responsibility is delegated to an Adjuster, which is created per alignment (hence per build) inside the corresponding PNC OpenShift cluster.
+In essence, everything depicted in Figure \ref{fig:alignment-process} as Reqour's responsibility, is delegated to an Adjuster which is created per alignment (hence per build) inside the corresponding PNC OpenShift cluster.
 
 The endpoint handler itself is being pretty simple: asynchronously starts execution of some code (in this case creation of Adjuster Job in the OpenShift cluster) and immediately returns 202 Accepted.
 

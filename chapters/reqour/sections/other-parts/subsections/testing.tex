@@ -19,6 +19,6 @@ Unit tests are used in several different ways:
     For example: \href{https://github.com/project-ncl/reqour/blob/akridl-thesis/rest/src/test/java/org/jboss/pnc/reqour/rest/endpoints/InternalSCMRepoCreationEndpointTest.java}{InternalSCMRepoCreationEndpointTest}
 \end{itemize}
 
-Integration tests are not present everywhere, e.g. to test \textit{POST /adjust}, we would need to integrate with an OpenShift cluster, but whenever it makes sense, an integration test is also used, e.g. \href{https://github.com/project-ncl/reqour/blob/akridl-thesis/rest/src/test/java/org/jboss/pnc/reqour/rest/endpoints/TranslationEndpointIT.java}{TranslationEndpointIT}.
+Alongside unit tests, integration tests are also present, but are not present for every endpoint, e.g. to test \textit{POST /adjust}, we would need to integrate with an OpenShift cluster. However, whenever it makes sense, an integration test is also used, e.g. \href{https://github.com/project-ncl/reqour/blob/akridl-thesis/rest/src/test/java/org/jboss/pnc/reqour/rest/endpoints/TranslationEndpointIT.java}{TranslationEndpointIT}.
 
 \end{document}

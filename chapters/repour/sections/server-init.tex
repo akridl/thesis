@@ -2,7 +2,7 @@
 
 \begin{document}
 
-Repour is written in Python using asyncio library\footnote{\url{https://docs.python.org/3/library/asyncio.html}}, which is designed to write concurrent code using the \textit{async/await} syntax. The core of asyncio applications is the event loop\footnote{\url{https://docs.python.org/3/library/asyncio-eventloop.html##asyncio-event-loop}}, which takes care of asynchronous tasks, its callbacks, IO operations, and others.
+Repour is written in Python using asyncio library\footnote{\url{https://docs.python.org/3/library/asyncio.html}}, which is designed to write concurrent code using the \textit{async/await} syntax. The core of asyncio applications is an event loop\footnote{\url{https://docs.python.org/3/library/asyncio-eventloop.html##asyncio-event-loop}}, which takes care of asynchronous tasks, its callbacks, IO operations, and others.
 
 Repour server is being initialized through several methods — below are listed the most important parts of the initialization (all of these listings are taken\footnote{There is not 1:1 correspondence, since pseudocodes covered in this text are simplified.} from Repour's GitHub using \textit{akridl-thesis} tag as the revision: \url{https://github.com/project-ncl/repour/blob/akridl-thesis}).
 
@@ -29,13 +29,13 @@ def start_server(bind, repo_provider, repour_url, adjust_provider):
 In the listing \ref{lst:startServer} displaying \textit{start\_server()}\footnote{\url{https://github.com/project-ncl/repour/blob/akridl-thesis/repour/server/server.py##L99}}, we can see:
 \begin{itemize}
     \item \textbf{L2:}\\
-    Obtaining of asyncio's event loop.
+    Obtaining asyncio's event loop.
 
     \item \textbf{L4-12:}\\
     Initialize the application as described at the listing \ref{lst:init}.
 
     \item \textbf{L14-17:}\\
-    Only once was the initialization of the event loop completed, start the server indefinitely. Allow the server to be killed by a keyboard interrupt.
+    Only once is the initialization of the event loop completed, start the server indefinitely. Allow the server to be killed by a keyboard interrupt.
 \end{itemize}
 
 \begin{lstlisting}[language=Python, caption=Server intialization: \textit{init} method, label={lst:init}]
@@ -93,7 +93,7 @@ In the listing \ref{lst:init} displaying \textit{init()}\footnote{\url{https://g
     Initialize endpoint handlers.
 
     \item \textbf{L31-40:}\\
-    Register previously initialized endpoint handlers as routes.
+    Register previously initialized endpoint handlers to routes.
 
     \item \textbf{L42-44:}\\
     Finally, create a TCP server bound to the specified address and port.

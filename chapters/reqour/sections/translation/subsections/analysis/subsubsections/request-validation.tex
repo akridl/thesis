@@ -10,16 +10,16 @@ For a request to be valid, \textit{externalUrl} field has to match one of the fo
     \textit{\textasciicircum [protocol://]user@host[:port]:[organization/]repository.git\$}\\
     where:
     \begin{itemize}
-        \item \textbf{protocol:} underlying protocol we use when reading (writing) the data from (to) external URL, e.g. \textit{http}, or \textit{ssh}
+        \item \textbf{protocol:} an underlying protocol we use when reading the data from the external URL, e.g. \textit{http}, or \textit{ssh}
 
-        \item \textbf{user:} specific user performing the operation, e.g. \textit{git}
+        \item \textbf{user:} a specific user performing the operation, e.g. \textit{git}
 
-        \item \textbf{port:} port of the target address, e.g. \textit{443}
+        \item \textbf{port:} a port of the target address, e.g. \textit{443}
 
-        \item \textbf{organization:} name of the organization owning the repository, e.g. the organization of the external URL of\\ \textit{git@github.com:\textbf{wildfly}/wildfly.git} is\\
+        \item \textbf{organization:} a name of the organization owning the repository, e.g. the organization of the external URL of\\ \textit{git@github.com:\textbf{wildfly}/wildfly.git} is\\
         \textit{wildfly}\footnote{\url{https://github.com/wildfly}}
 
-        \item \textbf{repository.git:} name of the repository with mandatory \textit{.git} suffix
+        \item \textbf{repository.git:} a name of the repository with mandatory \textit{.git} suffix
     \end{itemize}
 
     \item \textbf{Non-SCP-like format:}\\
@@ -42,7 +42,7 @@ For a request to be valid, \textit{externalUrl} field has to match one of the fo
     \item scp://git@gitlab.com:22:repo.git\\
     Valid SCP-like format
 
-    \item git@github.com:my-repo.git\\
+    \item git@github.com:my-repo\\
     Invalid SCP-like format: missing mandatory \textit{.git} suffix
 
     \item git@github.com/my-repo.git\\

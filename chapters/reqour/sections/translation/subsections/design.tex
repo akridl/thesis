@@ -2,9 +2,9 @@
 
 \begin{document}
 
-Firstly, there will be an endpoint handler handling all \textit{POST} requests at path \textit{/external-to-internal}. This endpoint handler will already accept only valid requests.
+Firstly, there will be an endpoint handler handling all \textit{POST} requests at the path \textit{/external-to-internal}.
 
-The endpoint will not contain business functionality but will delegate the computation to the underlying service. Once the service responds with the result, the endpoint simply returns the resulting DTO.
+The endpoint will not contain any business functionality but will delegate the computation to the underlying service. Once the service responds with the result, the endpoint simply returns the resulting DTO.
 
 The above word description is visualized in Figure \ref{fig:translation-design}.
 
